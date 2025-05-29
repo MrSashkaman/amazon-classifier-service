@@ -1,0 +1,38 @@
+image: python:3.12
+
+variables:
+    ANSIBLE_HOST_KEY_CHECKING: "false"
+
+.ssh_key_template: &ssh_key_template
+  before_script:
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+
+  after_script:
+    - rm -f ~/.ssh/id_rsa
+
+stages:
+  - deploy
+  - destroy
+
+run:
+    <<: *ssh_key_template
+    stage: deploy
+    script:
+      - apt-get update && apt-get install -y openssh-client sshpass
+      - python3 -m pip install ansible
+      - ansible-playbook -i inventory.ini deploy.yaml
+    when: manual
+
+clean:
+    <<: *ssh_key_template
+    stage: destroy
+    script:
+      - apt-get update && apt-get install -y openssh-client sshpass
+      - python3 -m pip install ansible
+      - ansible-playbook -i inventory.ini destroy.yaml
+    when: manual
+
+

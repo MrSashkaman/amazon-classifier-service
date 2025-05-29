@@ -1,0 +1,10 @@
+requests==2.32.3
+fastapi==0.78.0
+numpy==1.26.4
+omegaconf==2.2.2
+opencv-python==4.6.0.66
+uvicorn==0.18.2
+anyio==3.6.2
+dependency-injector==4.46.0
+python-multipart==0.0.5
+onnxruntime==1.19.0
