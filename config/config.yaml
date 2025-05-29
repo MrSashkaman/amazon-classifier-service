@@ -1,0 +1,24 @@
+image_classifier:
+  model_path: 'weights/amazon_classifier.onnx'
+  providers: ['CPUExecutionProvider']
+  threshold: 0.5
+  size: [224, 224]
+  classes:
+    agriculture: 0
+    artisinal_mine: 1
+    bare_ground: 2
+    blooming: 3
+    blow_down: 4
+    clear: 5
+    cloudy: 6
+    conventional_mine: 7
+    cultivation: 8
+    habitation: 9
+    haze: 10
+    partly_cloudy: 11
+    primary: 12
+    road: 13
+    selective_logging: 14
+    slash_burn: 15
+    water: 16
+    
